@@ -1,24 +1,39 @@
-import React from 'react';
+import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ProductList from './components/frontend/ProductList'
 import AppLayout from './components/frontend/layout/AppLayout';
+import Home from './components/frontend/Home';
+import Login from './components/frontend/auth/Login';
+import Register from './components/frontend/auth/Register';
+import Cart from './components/frontend/Cart';
 
-const App = () => {
+import { AuthProvider } from './context/AuthContext';
+
+function App() {
+  
   return (
+    <AuthProvider>
+      <Router>
 
-    <Router>
+        <AppLayout>
 
-      <AppLayout>
+          <Routes>
 
-        <Routes>
-          <Route path="/" element={<ProductList />} />
-          {/* Add more routes here */}
-        </Routes>
+            <Route path='/' element={<Home />} />
 
-      </AppLayout>
-      
-    </Router>
-  );
-};
+            <Route path='/login' element={<Login />} />
 
-export default App;
+            <Route path='/register' element={<Register />} />
+
+            <Route path='/cart' element={<Cart />} />
+
+          </Routes>
+
+        </AppLayout>
+
+      </Router>
+    </AuthProvider>
+  )
+  
+}
+
+export default App
